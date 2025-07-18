@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.13.1 on win32)" generated="20250718 15:11:03.066" rpa="false" schemaversion="4">
+<suite id="s1" name="Vws Example Test" source="D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\tests\vws_example_test.robot">
+<kw name="Open Browser Setup" library="common" type="SETUP">
+<kw name="Evaluate" library="BuiltIn">
+<var>${chrome options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20250718 15:11:03.767" level="INFO">${chrome options} = &lt;selenium.webdriver.chrome.options.Options object at 0x000001AE4634E660&gt;</msg>
+<status status="PASS" starttime="20250718 15:11:03.767" endtime="20250718 15:11:03.767"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{prefs}</var>
+<arg>download.default_directory=${DOWNLOAD_DIR}</arg>
+<arg>plugins.plugins_disabled=['Chrome PDF Viewer']</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250718 15:11:03.767" level="INFO">&amp;{prefs} = { download.default_directory=../resources/pdf_compare/to_verify | plugins.plugins_disabled=['Chrome PDF Viewer'] }</msg>
+<status status="PASS" starttime="20250718 15:11:03.767" endtime="20250718 15:11:03.767"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20250718 15:11:03.768" endtime="20250718 15:11:03.768"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${arg}</var>
+<arg>--log-level=3</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:03.768" level="INFO">${arg} = --log-level=3</msg>
+<status status="PASS" starttime="20250718 15:11:03.768" endtime="20250718 15:11:03.768"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome options}</arg>
+<arg>add_argument</arg>
+<arg>${arg}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20250718 15:11:03.768" endtime="20250718 15:11:03.768"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${arg}</var>
+<arg>--disable-logging</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:03.768" level="INFO">${arg} = --disable-logging</msg>
+<status status="PASS" starttime="20250718 15:11:03.768" endtime="20250718 15:11:03.768"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome options}</arg>
+<arg>add_argument</arg>
+<arg>${arg}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20250718 15:11:03.768" endtime="20250718 15:11:03.768"/>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<arg>options=${chrome options}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250718 15:11:03.769" level="INFO">Opening browser 'Chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20250718 15:11:03.768" endtime="20250718 15:11:06.244"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250718 15:11:06.244" endtime="20250718 15:11:06.357"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>0.5s</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20250718 15:11:06.357" endtime="20250718 15:11:06.358"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:03.767" endtime="20250718 15:11:06.358"/>
+</kw>
+<test id="s1-t1" name="Test Demo Ministry VWS pdf comparison" line="28">
+<kw name="Remove Files In Directory" library="common">
+<arg>${DOWNLOAD_DIR}</arg>
+<kw name="List Files In Directory" library="OperatingSystem">
+<var>${files}</var>
+<arg>${dir}</arg>
+<doc>Wrapper for `List Directory` that returns only files.</doc>
+<msg timestamp="20250718 15:11:06.361" level="INFO" html="true">Listing contents of directory '&lt;a href="file://D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\resources\pdf_compare\to_verify"&gt;D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\resources\pdf_compare\to_verify&lt;/a&gt;'.</msg>
+<msg timestamp="20250718 15:11:06.362" level="INFO">1 file:
+interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</msg>
+<msg timestamp="20250718 15:11:06.363" level="INFO">${files} = ['interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf']</msg>
+<status status="PASS" starttime="20250718 15:11:06.361" endtime="20250718 15:11:06.363"/>
+</kw>
+<for flavor="IN">
+<var>${file}</var>
+<value>@{files}</value>
+<iter>
+<var name="${file}">interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</var>
+<kw name="Remove File" library="OperatingSystem">
+<arg>${dir}/${file}</arg>
+<doc>Removes a file with the given path.</doc>
+<msg timestamp="20250718 15:11:06.365" level="INFO" html="true">Removed file '&lt;a href="file://D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\resources\pdf_compare\to_verify\interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf"&gt;D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\resources\pdf_compare\to_verify\interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20250718 15:11:06.364" endtime="20250718 15:11:06.366"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:06.363" endtime="20250718 15:11:06.366"/>
+</iter>
+<status status="PASS" starttime="20250718 15:11:06.363" endtime="20250718 15:11:06.366"/>
+</for>
+<status status="PASS" starttime="20250718 15:11:06.360" endtime="20250718 15:11:06.366"/>
+</kw>
+<kw name="Navigate To Rijksoverheid Homepage" library="rijksoverheid_home_page">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>https://www.rijksoverheid.nl/</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250718 15:11:06.369" level="INFO">Opening url 'https://www.rijksoverheid.nl/'</msg>
+<status status="PASS" starttime="20250718 15:11:06.368" endtime="20250718 15:11:07.777"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:06.368" endtime="20250718 15:11:07.777"/>
+</kw>
+<kw name="Verify Rijksoverheid Homepage" library="rijksoverheid_home_page">
+<kw name="Verify Rijksoverheid Homepage Header Text" library="rijksoverheid_home_page">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${HeaderText}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:07.779" endtime="20250718 15:11:08.325"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${element_text}</var>
+<arg>${HeaderText}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:09.352" level="INFO">${element_text} = Rijksoverheid</msg>
+<status status="PASS" starttime="20250718 15:11:08.326" endtime="20250718 15:11:09.352"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${element_text}</arg>
+<arg>Rijksoverheid</arg>
+<arg>ignore_case=True</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20250718 15:11:09.352" endtime="20250718 15:11:09.353"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Rijksoverheid homepage successfully loaded and verified\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:09.353" endtime="20250718 15:11:09.353"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:07.779" endtime="20250718 15:11:09.353"/>
+</kw>
+<kw name="Verify Rijksoverheid Homepage Breadcrumb" library="rijksoverheid_home_page">
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${level1}</var>
+<arg>${Home}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:10.380" level="INFO">${level1} = Home</msg>
+<status status="PASS" starttime="20250718 15:11:09.354" endtime="20250718 15:11:10.380"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${level1}</arg>
+<arg>Home</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250718 15:11:10.380" endtime="20250718 15:11:10.381"/>
+</kw>
+<kw name="Should Not Exist" library="OperatingSystem">
+<arg>${CurrentPage}</arg>
+<doc>Fails if the given path (file or directory) exists.</doc>
+<msg timestamp="20250718 15:11:10.382" level="INFO" html="true">Path '&lt;a href="file://D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\tests\css:span[aria-current="page"]"&gt;D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\tests\css:span[aria-current="page"]&lt;/a&gt;' does not exist.</msg>
+<status status="PASS" starttime="20250718 15:11:10.381" endtime="20250718 15:11:10.382"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Breadcrumb successfully verified\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:10.382" endtime="20250718 15:11:10.383"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:09.354" endtime="20250718 15:11:10.383"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:07.778" endtime="20250718 15:11:10.383"/>
+</kw>
+<kw name="Click On Ministeries Link" library="rijksoverheid_home_page">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${MinistriesLink}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:10.384" endtime="20250718 15:11:10.898"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${MinistriesLink}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:10.899" level="INFO">Clicking element 'css:a[href="/ministeries"]'.</msg>
+<status status="PASS" starttime="20250718 15:11:10.899" endtime="20250718 15:11:12.502"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Ministries link clicked\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:12.503" endtime="20250718 15:11:12.509"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:10.384" endtime="20250718 15:11:12.509"/>
+</kw>
+<kw name="Verify Ministeries Page Is Loaded" library="ministries">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:h1</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:12.518" endtime="20250718 15:11:13.107"/>
+</kw>
+<kw name="Location Should Contain" library="SeleniumLibrary">
+<arg>/ministeries</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20250718 15:11:13.628" level="INFO">Current location contains '/ministeries'.</msg>
+<status status="PASS" starttime="20250718 15:11:13.108" endtime="20250718 15:11:13.628"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Ministeries</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20250718 15:11:14.651" level="INFO">Current page contains text 'Ministeries'.</msg>
+<status status="PASS" starttime="20250718 15:11:13.629" endtime="20250718 15:11:14.652"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Ministries page successfully loaded</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:14.652" endtime="20250718 15:11:14.653"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:12.518" endtime="20250718 15:11:14.654"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${VWSLink}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20250718 15:11:14.654" endtime="20250718 15:11:15.968"/>
+</kw>
+<kw name="Click On Menu Item" library="ministries">
+<arg>${VWSLink}</arg>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${menu_selector}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:15.969" endtime="20250718 15:11:16.483"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${menu_selector}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:16.497" level="INFO">Clicking element 'css:a[href="/ministeries/ministerie-van-volksgezondheid-welzijn-en-sport"]'.</msg>
+<status status="PASS" starttime="20250718 15:11:16.483" endtime="20250718 15:11:17.979"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Menu item clicked: ${menu_selector}\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:17.979" endtime="20250718 15:11:17.980"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:15.969" endtime="20250718 15:11:17.980"/>
+</kw>
+<kw name="Click Search Button" library="VWS_home_page">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:button#search-submit</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:17.981" endtime="20250718 15:11:18.498"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>css:button#search-submit</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:18.499" level="INFO">Clicking element 'css:button#search-submit'.</msg>
+<status status="PASS" starttime="20250718 15:11:18.499" endtime="20250718 15:11:19.584"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Search button clicked - search field opened\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:19.584" endtime="20250718 15:11:19.585"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:17.981" endtime="20250718 15:11:19.585"/>
+</kw>
+<kw name="Fill Search Field With Term" library="VWS_home_page">
+<arg>filenet</arg>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:input#search-keyword</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:19.586" endtime="20250718 15:11:20.103"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>css:input#search-keyword</arg>
+<arg>${search_term}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:20.104" level="INFO">Typing text 'filenet' into text field 'css:input#search-keyword'.</msg>
+<status status="PASS" starttime="20250718 15:11:20.103" endtime="20250718 15:11:21.695"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Search term '${search_term}' filled in\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:21.695" endtime="20250718 15:11:21.696"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:19.586" endtime="20250718 15:11:21.696"/>
+</kw>
+<kw name="Submit Search" library="VWS_home_page">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:button#search-submit</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:21.697" endtime="20250718 15:11:22.234"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>css:button#search-submit</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:22.235" level="INFO">Clicking element 'css:button#search-submit'.</msg>
+<status status="PASS" starttime="20250718 15:11:22.234" endtime="20250718 15:11:23.489"/>
+</kw>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>/zoeken</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" starttime="20250718 15:11:23.489" endtime="20250718 15:11:24.001"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:h1</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:24.001" endtime="20250718 15:11:24.514"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Search query submitted and results page loaded\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:24.514" endtime="20250718 15:11:24.515"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:21.697" endtime="20250718 15:11:24.515"/>
+</kw>
+<kw name="Verify Search Results" library="VWS_search">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:span[aria-current="page"]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:24.516" endtime="20250718 15:11:25.029"/>
+</kw>
+<kw name="Element Should Contain" library="SeleniumLibrary">
+<arg>css:span[aria-current="page"]</arg>
+<arg>Zoeken</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<msg timestamp="20250718 15:11:26.057" level="INFO">Element 'css:span[aria-current="page"]' contains text 'Zoeken'.</msg>
+<status status="PASS" starttime="20250718 15:11:25.029" endtime="20250718 15:11:26.057"/>
+</kw>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${current_url}</var>
+<doc>Returns the current browser window URL.</doc>
+<msg timestamp="20250718 15:11:26.566" level="INFO">${current_url} = https://www.rijksoverheid.nl/zoeken?trefwoord=filenet&amp;search-submit=</msg>
+<status status="PASS" starttime="20250718 15:11:26.057" endtime="20250718 15:11:26.566"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${current_url}</arg>
+<arg>/zoeken</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20250718 15:11:26.566" endtime="20250718 15:11:26.566"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Search results page successfully verified\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:26.566" endtime="20250718 15:11:26.567"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:24.516" endtime="20250718 15:11:26.567"/>
+</kw>
+<kw name="Verify Search Result Contains And Click" library="VWS_search">
+<arg>Interim auditrapport baten-lastenagentschap Rijksvastgoedbedrijf 2022</arg>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:h3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:26.568" endtime="20250718 15:11:27.084"/>
+</kw>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${h3_elements}</var>
+<arg>css:h3</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20250718 15:11:27.598" level="INFO">${h3_elements} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="1b5e4625d82bcd64b037891d70f7433d", element="f.DEA63E4BE68508C81E6B850FC803D87C.d.D5907D8168DE120455266340F8C8D9C2.e.119")&gt;, &lt;selenium.webdri...</msg>
+<status status="PASS" starttime="20250718 15:11:27.085" endtime="20250718 15:11:27.598"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${found}</var>
+<arg>False</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:27.599" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250718 15:11:27.599" endtime="20250718 15:11:27.599"/>
+</kw>
+<for flavor="IN">
+<var>${element}</var>
+<value>@{h3_elements}</value>
+<iter>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="1b5e4625d82bcd64b037891d70f7433d", element="f.DEA63E4BE68508C81E6B850FC803D87C.d.D5907D8168DE120455266340F8C8D9C2.e.119")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:28.114" level="INFO">${text} = Interim auditrapport baten-lastenagentschap Rijksvastgoedbedrijf 2022</msg>
+<status status="PASS" starttime="20250718 15:11:27.599" endtime="20250718 15:11:28.114"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${contains}</var>
+<arg>Should Contain</arg>
+<arg>${text}</arg>
+<arg>${expected_text}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected_text}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20250718 15:11:28.115" endtime="20250718 15:11:28.115"/>
+</kw>
+<msg timestamp="20250718 15:11:28.115" level="INFO">${contains} = True</msg>
+<status status="PASS" starttime="20250718 15:11:28.114" endtime="20250718 15:11:28.115"/>
+</kw>
+<if>
+<branch type="IF" condition="${contains}">
+<kw name="Set Variable" library="BuiltIn">
+<var>${found}</var>
+<arg>True</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:28.116" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20250718 15:11:28.116" endtime="20250718 15:11:28.116"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Search result found with text: "${text}" - click on element</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:28.116" endtime="20250718 15:11:28.117"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:28.117" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="1b5e4625d82bcd64b037891d70f7433d", element="f.DEA63E4BE68508C81E6B850FC803D87C.d.D5907D8168DE120455266340F8C8D9C2.e.119")&gt;'.</msg>
+<status status="PASS" starttime="20250718 15:11:28.117" endtime="20250718 15:11:29.062"/>
+</kw>
+<break>
+<status status="PASS" starttime="20250718 15:11:29.063" endtime="20250718 15:11:29.063"/>
+</break>
+<status status="PASS" starttime="20250718 15:11:28.115" endtime="20250718 15:11:29.063"/>
+</branch>
+<status status="PASS" starttime="20250718 15:11:28.115" endtime="20250718 15:11:29.063"/>
+</if>
+<status status="PASS" starttime="20250718 15:11:27.599" endtime="20250718 15:11:29.063"/>
+</iter>
+<status status="PASS" starttime="20250718 15:11:27.599" endtime="20250718 15:11:29.063"/>
+</for>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${found}</arg>
+<arg>No search result found with text: "${expected_text}"</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20250718 15:11:29.063" endtime="20250718 15:11:29.064"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Search result clicked successfully</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:29.064" endtime="20250718 15:11:29.065"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:26.567" endtime="20250718 15:11:29.065"/>
+</kw>
+<kw name="Verify Document Title On Current Page" library="VWS_search">
+<arg>Interim auditrapport baten-lastenagentschap Rijksvastgoedbedrijf 2022</arg>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:h1.download</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:29.066" endtime="20250718 15:11:29.582"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${actual_title}</var>
+<arg>css:h1.download</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:30.608" level="INFO">${actual_title} = Interim auditrapport baten-lastenagentschap Rijksvastgoedbedrijf 2022</msg>
+<status status="PASS" starttime="20250718 15:11:29.582" endtime="20250718 15:11:30.609"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${actual_title}</arg>
+<arg>${expected_title}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250718 15:11:30.609" endtime="20250718 15:11:30.609"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Document title correct: "${actual_title}"\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:30.610" endtime="20250718 15:11:30.610"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:29.065" endtime="20250718 15:11:30.610"/>
+</kw>
+<kw name="Click On Download URL" library="VWS_search">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css:.download a[href$=".pdf"]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250718 15:11:30.611" endtime="20250718 15:11:31.132"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>css:.download a[href$=".pdf"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20250718 15:11:31.132" level="INFO">Clicking element 'css:.download a[href$=".pdf"]'.</msg>
+<status status="PASS" starttime="20250718 15:11:31.132" endtime="20250718 15:11:32.240"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Download URL clicked\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:32.241" endtime="20250718 15:11:32.241"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:30.611" endtime="20250718 15:11:32.241"/>
+</kw>
+<kw name="Download PDF To Folder" library="common">
+<arg>${DOWNLOAD_DIR}</arg>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${pdf_link}</var>
+<arg>css:.download a[href$=".pdf"]</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250718 15:11:33.270" level="INFO">${pdf_link} = https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/rapporten/2022/10/06/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022/interim-auditrapport-baten-lastenagentschap-ri...</msg>
+<status status="PASS" starttime="20250718 15:11:32.242" endtime="20250718 15:11:33.270"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>PDF link found: ${pdf_link}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:33.270" endtime="20250718 15:11:33.271"/>
+</kw>
+<kw name="Get File Name From Url" library="common">
+<var>${file_name}</var>
+<arg>${pdf_link}</arg>
+<kw name="Extract File Name From Url" library="string_utils">
+<var>${file_name}</var>
+<arg>${url}</arg>
+<msg timestamp="20250718 15:11:33.272" level="INFO">${file_name} = interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</msg>
+<status status="PASS" starttime="20250718 15:11:33.272" endtime="20250718 15:11:33.272"/>
+</kw>
+<msg timestamp="20250718 15:11:33.272" level="INFO">${file_name} = interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</msg>
+<status status="PASS" starttime="20250718 15:11:33.272" endtime="20250718 15:11:33.272"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${target_path}</var>
+<arg>${download_dir}/${file_name}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:33.273" level="INFO">${target_path} = ../resources/pdf_compare/to_verify/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</msg>
+<status status="PASS" starttime="20250718 15:11:33.272" endtime="20250718 15:11:33.273"/>
+</kw>
+<kw name="Download File" library="common">
+<arg>${pdf_link}</arg>
+<arg>${target_path}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<arg>__import__('urllib3').disable_warnings()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" starttime="20250718 15:11:33.273" endtime="20250718 15:11:33.274"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>session</arg>
+<arg>${url}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250718 15:11:33.275" level="INFO">Creating Session using : alias=session, url=https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/rapporten/2022/10/06/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250718 15:11:33.274" endtime="20250718 15:11:33.275"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>session</arg>
+<arg>${url}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250718 15:11:33.472" level="INFO">GET Request : url=https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/rapporten/2022/10/06/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf 
+ path_url=/binaries/rijksoverheid/documenten/rapporten/2022/10/06/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250718 15:11:33.476" level="INFO">GET Response : url=https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/rapporten/2022/10/06/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf 
+ status=200, reason= 
+ headers={'Server': 'nginx', 'Date': 'Fri, 18 Jul 2025 13:11:33 GMT', 'Content-Type': 'application/pdf;charset=UTF-8', 'Content-Length': '281077', 'Connection': 'keep-alive', 'vary': 'Origin', 'content-disposition': 'attachment; filename="interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf"', 'etag': '"1649756334399"', 'Cache-Control': 'max-age=300, public', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '1; mode=block', 'X-Frame-Options': 'DENY', 'Strict-Transport-Security': 'max-age=31622400; includeSubDomains', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Cache-Status': 'HIT:HIT', 'X-Via': '14:3:5', 'Accept-Ranges': 'bytes'} 
+ body=%PDF-1.7%����
+658 0 obj&lt;&lt;/Linearized 1/L 281077/O 660/E 62216/N 14/T 280534/H [ 483 400]&gt;&gt;endobj             
+671 0 obj&lt;&lt;/DecodeParms&lt;&lt;/Columns 4/Predictor 12&gt;&gt;/Filter/FlateDecode/ID[&lt;B121C7EDF6FF2341B22DEBB71A9EFB7A&gt;&lt;C723D5136070164B9BDB538E48845536&gt;]/Index[658 24]/Info 657 0 R/Length 74/Prev 280535/Root 659 0 R/Size 682/Type/XRef/W[1 2 1]&gt;&gt;stream
+h�bbd``b`N�Q@��D�,�@��Hx���2�@��	��@�������Ȥd100C���� �Zf
+endstreamendobjstartxref
+0
+%%EOF
+        
+681 0 obj&lt;&lt;/C 372/Filter/FlateDecode/I 394/Length 311/S 297&gt;&gt;stream
+h�b```b``�e`a``�b`@V da����
+�e|��i	��K���U|����C:�f���&amp;G�(��3+�&lt;ۘx��i��)&gt;&lt;RV�9�-x�ܪv�ĩ���bE
+/�u{�؀J��ڰ��e_ٲ��(n��سvAI�t��͍��ZEXH����YξkPǬ`�6�������`�S��fY��L2!I@�P��!h30�$in ���a�g���!�"`����N�i�/8��8,4���rF�K�鈆O��B��G�Z99ݠak��"���d��C܉����f"F�Wy�
+endstreamendobj659 0 obj&lt;&lt;/Lang(nl-NL)/MarkInfo&lt;&lt;/Marked true&gt;&gt;/Metadata 63 0 R/OutputIntents[&lt;&lt;/DestOutputProfile 64 0 R/Info(Creator: HP     Manufacturer:IEC    Model:sRGB)/OutputConditionIdentifier(sRGB)/RegistryName(http://www.color.org)/S/GTS_PDFA1/Type/OutputIntent&gt;&gt;]/Pages 656 0 R/StructTreeRoot 121 0 R/Type/Catalog/ViewerPreferences 672 0 R&gt;&gt;endobj660 0 obj&lt;&lt;/Contents 662 0 R/CropBox[0 0 595.2 841.8]/Group&lt;&lt;/CS/DeviceRGB/S/Transparency/Type/Group&gt;&gt;/MediaBox[0 0 595.2 841.8]/Parent 656 0 R/Resources&lt;&lt;/ExtGState&lt;&lt;/GS7 673 0 R/GS8 674 0 R&gt;&gt;/Font&lt;&lt;/F1 677 0 R/F2 680 0 R&gt;&gt;/ProcSet[/PDF/Text/ImageB/ImageC/ImageI]/XObject&lt;&lt;/Image11 668 0 R/Image13 669 0 R/Image14 670 0 R&gt;&gt;&gt;&gt;/Rotate 0/StructParents 0/Type/Page&gt;&gt;endobj661 0 obj&lt;&lt;/Filter/FlateDecode/First 68/Length 574/N 9/Type/ObjStm&gt;&gt;stream
+h��TYk1�+�^����g[�M�M\yPma/ػfWi�ߑ֎��&gt;!����hf&gt;�jÁ�6�B!A9
+�@�A�$J�҂tI��0���V��=�n���bV�M�X��N�1�T��o��m�p?N���,&lt;�+D��
+��f��1����˸I��ݧP���dZ�g��6~Հ�dT��׫��wJ۬N�N/Y9*6�����L�6�^0?̊mh&amp;��c����x���VI)���Xt�&amp;M�C�ˢ\��d��m�\3I�1l�РM/�H���.V5�zȂ+��&lt;����⛐p�dX.�t�e�l��󨨛�_��X��]�۔�?Ar�#F���b
+o���8߃%9�&amp;?	�&gt;g�Q�N�(j�h1Z��B��i�YLq�,.iѿ�2�b&lt;�z�K�w2NP+�[*��qnp�J�I�2B����B�4/���5v���EZ0�!��B�L���[b	���+�H�ր�"kT���A۴w�|��L�L�?�Y�t��m�klu�!�O��3�w��dN��H��ɬKؔM�yru��OG��qM+uݱ����^�)�um��`$J�8
+endstreamendobj662 0 obj&lt;&lt;/Filter/FlateDecode/Length 754&gt;&gt;stream
+x��W�j�@}��Q*x���B��ib�Cȃl+���r�M�Џ�d��bɑ��9g.Vr6s������$9s.��xJ���9�����}6M27*&amp;��{�y��&lt;��S8����a����QR�VFPb`����O0	��n$�,�
+�/a@�5
+B��!�;F��G�9^���,�n��)���_��
+��puwɞ$����&lt;�����#	��3(���[3ʡ��ô!����P��%�2A�J��n{U�Tm�p�L�{�����%��p���b%�J j�!o��^�,�������q6�)��Z�s%W�Nt��Yc����ΰ�V�k�tsŎ*�(Z"a+@�%���P�[�Th/�D���"�Xg�Ϟ֬�YMl���נTkn��L����n�I}��w�������Ghʶ�FeDɴ�����P�ea�����#+���E(��&gt;W���a�i�6����Vm�)Q����U=y��`8w����#��G�Qo���X�Eݮ;!%�����"B��M�C	�v��ãYl�Q�a�xk�|e����:���ԏ��@��A�+n�,��&lt;��XDn{�~!S�9�^��|�6Nq���u�8�)B���E����Q�I�h�Oܼ���lں���cj�u�a����n�㡬�7��=���r7,b�V|&gt;���^��������5�n��u �=�́�X����������P�ة_D�ZD�z�K�����/�]��
+endstreamendobj663 0 obj&lt;&lt;/Length 1463/Subtype/XML/Type/Metadata&gt;&gt;stream
+&lt;?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?&gt;&lt;x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701"&gt;
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+&lt;rdf:Description rdf:about=""  xmlns:xmp="http://ns.adobe.com/xap/1.0/"&gt;
+&lt;/rdf:Description&gt;
+&lt;rdf:Description rdf:about=""  xmlns:xmpRights="http://ns.adobe.com/xap/1.0/rights/"&gt;
+&lt;xmpRights:Marked&gt;True&lt;/xmpRights:Marked&gt;&lt;/rdf:Description&gt;
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+&lt;/rdf:RDF&gt;&lt;/x:xmpmeta&gt;&lt;?xpacket end="w"?&gt;
+endstreamendobj664 0 obj&lt;&lt;/Filter/FlateDecode/Length 18820/Length1 61432/Metadata 663 0 R&gt;&gt;stream
+x��}|T����;��n�lB��d{77��&amp;��#!�͓G@�#�E�M�[0�Y���*�R_���([n6�m�V�/k�*X�����Z[!�����j������~���g�̙9��̙�gΝل@������5m���~ٕDl	������V�FT��_��[�] �J4���v͢��+V�3�jCD�����/*kｈh�/�R��,l]����)��1p�0�LM߅�rQ�]�b��ӏK3P��j���և�|��J`�+Z/�t�ek�|"��״�J+�KǄ}���X����}Bt�D�Gwv�^ɥ�?!�;W-��-���DS!J������]{���ɕ�Y2-$�{�}\�W�y-��S7�.�LG5��jv��}���?�]rF2�'u*u��`H���H��
+�|�F
+Y�;�����|'-�R�"I&amp;�Ȋ��4&lt;�O�_dX�5�VE_��y冁6��f�E"�ޮL3�tS9ˎ&lt;���1^G��?�C)�_շLT�i�5���m�Ab�� 1�A�ݑ��n�*(��[c����	�"-@��fb�� 1�Ab�� 1�Ab�� 1�A�y ?F���6� �i���w[�� 1��Y��OY�HG���W%���E1�Ab�� 1��1{�/
+lD%�u�)�z���q��Jh�4�8��y^��R��yw0���?z���]����40������)�4Y��s��}���j�_�����[��*�l^�z��Ύ�V,�t��%�-l��&lt;kڅ���T��(;f�����#���%�ޢ�&lt;O���V]Æf;�2���!�)��$kbB|��lRd.1*��B����&lt;m��Q�Z�h=��U����Ր�����梿�D5g4�M��ʒb�^S�Cu����NoA��:-��Ǎ�T���([Qv��@�w,�SuR���uK��Cu�'!�V�]_RL=�	(&amp;��۵�fό�d����b�Qz�VW�gju��{�[�M�[��nw��Xg��Z�NZ���5T��F7��fcu��mQ{���o�Q[ț�@[�zq��[�b�/ƭ���9�V�yjm�u�J���ޱT����T}���s�n���C�&lt;��|��q�������mƀ����Stv�z�	-S�8�F[ҽ,��խӌ��pVV�@�(eիݳZ4�^�Ԃ�u�=i�=c}of@�&lt;_RR�cK�.kOR�`!�zna��Q2�E�qƙue�"m�AW�UXҢaNcE�p,u��� ��J_��T��u�*������ij�g����|N� ��}F�(�䌣A~��{�zQ�ps-�(lo�G���t�Ӧ�`��	k���a��n�x����kzK��R�3L�7�K!!�?-Io��Ӓ3�C�x����uKޙO�-cH��
+�e�?���ƙZ���-j}whpmg�W��Ǟ��XT��eVj�כ1�E0�Q&lt;Z���Dl5ب�m�N)-INnt���LϢҒ(��=&amp;����-p`�����̓�n�Wl�9!Z�l��9�����Ϋ�g^b7��r��8knww�y����Mm�u��E��4զu�-����&gt;t���Enq�71�%���X���=�=�Z􀳇�1�[��4oP�ۼ�[kY�Az*(�=+T��D5=�~zO�]?sn����j	KL��{r!k9�"�\IpSTTQ�F���,���@��ː�è��12x��&lt;F�}R�g��g�{��O�J��e�,Q^WT�`P��MH�d�Ѓʬ�@��@E`\`�T%aE+�A�c�;�U1g��a��XWϸ���ӌA�.h
+^�,j�t��o&gt;;��-��	�94j�x	#��	Fx�����x�-[8�aWk�{��e힬�/��@�!F�*�� (�4��	��J�%��λm�N��`|����W���6��3&lt;�A�φo��eN}y�{F�U�jS���+�����'�]��b�cӷk`LCmis���P�W��k����3#�y����fah�#��w5����fa�[�QU]U�]�����ObHk�L�%&lt;��S7#b-j]�����]�hl��������Z��`����&gt;O7�M�N�ֺPC�S�����#zs�k� T$���X8xT��ڻ�!g^ȋ�H�N�V˻���)���!l`զ6�ƣnu��E�$jAtU��E�7&gt;y�
+o�&lt;��,��tx���W㝧7�V1Vzu�&gt;B1y&amp;�q4:��S&lt;���x�S�Vui�`����$�:O?�h3p��i�N{&lt;���s������9��%x�T��,�;�4�\�~�*A��MC]}��^^䪪N��(�?��=:����*`'�������ח�@��.(,= ����w�(�\`	g8��ᚚ����BoQI��x�6�(��*���-^z��
+�WR2c䢝�-ҁ���y�;��C�,Gn�왰5���?D��ރ|��doRJ)U���o��#?&lt;
+&lt;����G��[�{�2%#w}�i����=�s�'#�;�[�2V�~�/9�͗�n��7����ˠ�����@�F]����
+����Q��m��
+�����`}_k�[3Hw���a.[�0�U��Qڎ�v,�vq�A���|�1Rh)�(�r]vk�3��מY�Kz��
+��X�+H�h�i��Q��:��:�*~��wE�6�
+�X��Xw�ב��k�o�5�5�c!��_.p����J�拰���7sh�ֳ��xሠI�4Y�.4�{�wao��(�֥�I���(Q�\`�(��p��u�_H+,Hrm�6�M�&amp;E�ױ�Gy)5Y.��K��B��W�1�wVo�m�M��mÎi�|ڰ'�|�U~	p&gt;�e&gt;��D��9䄚x壠
+j��K�^2���&amp;�Kȅ�	vJMg$���Ḃ4	�$��(�����5+jVh�N�Br���(P\�O����!�ɐ�0tN���t2P��_��B���m+d�ʪ��@�����[�������tL�4��������R��x���*�\=N���#�&lt;��B�V;�������N�*h�C�g��e��Ð���K��9��@�b�ꩈc�;�}?��v�����ȏ�i��;���6�h#b������vz��Aܝ#�G�v�e&gt;i�#���^��HwQ���\j��Vm��P�l���f��0�*#�$M�~&gt;�����k'[�Q�
+���F�$T[�U[�U[����Nn�J�Fn9���/4��@���g���n����ﺭ+��ܢ]6��UJ3���[�|���\֧\�9.������b�j�|��;E���/�.��f�:���.���"��j��p��S�ʻ@������gf�-����c��t�)�$�����$�zt1�T�&lt;��W^%��A�;P��X����d���&amp;����3\܆Q�.^�Q�bc�[�����V�� 7����l{���E����r%��NIX2epĉ�y9�h��p�hU'�c�amH����Q�1�+��J��E6i��N�4�%�[)Ǡ��vz1��s���a1q��%��r���7�_�I�=����
+�^,�c�]/h����c�î��&gt;��Il����CWb��/v�P3��4H�wT�����u��A=캪�a���gC,�R�����c*1X �U��r��=��M�����'L�=��0b�S��F57�9(�"3[(6�1��g���ǙG�K̪y�9ۜfI��,I�DK��b1Yd�d!KZ_�h�+��L3�1�"���M��zS\[�E��ч�F�qf�S�qV�&gt;���g����zuK�E-=��DM����lV\T�6;��@�1����n�|c0���vjlS��gb&amp;��*Z��2�U9�Rǧ�7���,4�{ς�{.8���4�l	�����5A��(G"(7��I��RG}��S�`��AZY?C�ن��5ʑ:�F���^�j��z�)��5���'''��8�$��G�J��}�b��$Ԥa�k��+jp�hg��v�H,��,9��β�R���b�P��B�g�!�sV�y���c��aAc���Du��:�:�&amp;,��_(���7����BZ�B`H߲n�C\�Ԟo~ϗjk_"(.;oj��Z�����w��Bܪ��P{������ºpk��^k��޻��񼱾qf��M��M��Z1ֽ�G�(�����X�b�{�c5Ψa�M-=�	�^��RB&lt;�E�Ú[�xc��s;�t�	�oPO�jt+P�J�K���T�����"Ǖ��΃l���v�VC^r�/�;�Y�z���"[�֋|�Z��\���٨7��*��z=�2�&lt;��=_��_0�ܡux:
+:v�Ӵi�i�v�UZ����j���|_�o���\W�k��ր`mK��h動RG�ʭ�;*�V*Qv�9/�H�s:r6�l�ّ�7�$�&lt;�ܑ�������sׂ�#�k֊���u���θ�8n�S��q���8��o�[9wq����|��6W�	4�*FnKؙ�'�'NPtS����IQM~S��d
+�:M]�m����m�mf)�ЙЕ�m	j�?!�Д��̌0��@�Fk�:6��Ε_��R�+�R�����ֶT�P;��g�Ԁ#�3�
+����w��t5�o��
+/�%���ub�^I���?�tlh�(�97J�/����Rh�jd|u2��"��C�_�
+/�F�k�{0��V{�E���j��E�	�Y���%�b���e��bb���������]-���4@@��r�2�\�l�VG�w�ǀ�L��T.%m`Y�(�����C��ʥl=N�xA݋3\m�	�"��$ZϞ�zj8:�F�s�u�@v����:]L��=:��v#��R�O=u�Y�y#]9�x���A���$��b����F��N�C��P�.��r#=4��P
+��蛸z/�g#'ai.��}l#���m����ȥ4���/Y#JSi��Z�~{�I�0;����~�C�B��u���_�k���R]@R+��E��!lD�#5������ y���vxiͧ�n��+tg�6
+G�=H/�O��`[#�����E���FHv|%̰��!�J�0~/f�,���c|�����E�#��D��Z`�zc|����&lt;�����k��SW?���K��m��g�+BzG�R���y�Xp(K�i.u�:�}O�qz�~Ͼ�������A9�k�G5�}�g��-xJa�Cz�La*f1�]�f��l+�������Ir���!��s�My��D*�S����K��&lt;�+��7c���Iz���&lt;V�����K�:�{����f�U&gt;�\;ptࣁ/#�d��M�:����
+�c���-c�ٻ�|���'q��(^�g� ��o�O��U��e�Ҫ�1�\6�R�1r�q�2��|*�2�Yo��u"���tu�M�i'�}�(=C����c&lt;bnؼ����mf7!��`��'�3���HRR�4Z��j�i��i�tXzEz�g�vD�.�����u�ud9��"MT�(���3�'��,ϟ&lt;~��T���4�5p��-��62;��{������`����]H�����yzհ�Lb
+&lt;��4xC1�Z����$6�MGjF���"��6�i�b_... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20250718 15:11:33.477" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20250718 15:11:33.275" endtime="20250718 15:11:33.477"/>
+</kw>
+<kw name="Write Binary File" library="string_utils">
+<arg>${target_path}</arg>
+<arg>${resp.content}</arg>
+<status status="PASS" starttime="20250718 15:11:33.477" endtime="20250718 15:11:33.499"/>
+</kw>
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20250718 15:11:33.499" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20250718 15:11:33.499" endtime="20250718 15:11:33.499"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:33.273" endtime="20250718 15:11:33.499"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250718 15:11:38.500" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20250718 15:11:33.499" endtime="20250718 15:11:38.500"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>PDF downloaded to: ${target_path}\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:38.500" endtime="20250718 15:11:38.501"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:32.242" endtime="20250718 15:11:38.501"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250718 15:11:38.502" endtime="20250718 15:11:41.296"/>
+</kw>
+<kw name="Compare Downloaded PDF With Baseline" library="common">
+<arg>${DOWNLOAD_DIR}/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</arg>
+<arg>${BASELINE_DIR}/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</arg>
+<kw name="File Should Exist" library="OperatingSystem">
+<arg>${baseline}</arg>
+<arg>Baseline PDF not found: ${baseline}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<msg timestamp="20250718 15:11:41.304" level="INFO" html="true">File '&lt;a href="file://D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\resources\pdf_compare\baseline\interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf"&gt;D:\Dropbox\Werk\Netwerk en acquisitie\Leads\2025\Tester VWS (FileNet)\robotFrameworkVoorbeeld\resources\pdf_compare\baseline\interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf&lt;/a&gt;' exists.</msg>
+<status status="PASS" starttime="20250718 15:11:41.302" endtime="20250718 15:11:41.306"/>
+</kw>
+<kw name="Get Text From PDF" library="common">
+<var>${downloaded_text}</var>
+<arg>${downloaded}</arg>
+<kw name="Run Process" library="Process">
+<var>${result}</var>
+<arg>python</arg>
+<arg>../resources/tools/extract_pdf_text.py</arg>
+<arg>${pdf_path}</arg>
+<arg>shell=True</arg>
+<arg>stdout=STDOUT</arg>
+<arg>stderr=STDERR</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<msg timestamp="20250718 15:11:41.312" level="INFO">Starting process:
+python ../resources/tools/extract_pdf_text.py ../resources/pdf_compare/to_verify/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</msg>
+<msg timestamp="20250718 15:11:41.342" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20250718 15:11:42.554" level="INFO">Process completed.</msg>
+<msg timestamp="20250718 15:11:42.554" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<status status="PASS" starttime="20250718 15:11:41.307" endtime="20250718 15:11:42.554"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${text}</var>
+<arg>${result.stdout}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:42.559" level="INFO">${text} = Interim-auditrapport baten-lastenagentschap  
+Rijksvastgoedbedrijf 2022 
+
+| 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Colofon 
+
+Titel 
+
+Interim auditrapport baten- lastenagentschap 
+Rijksvastgoedbedrijf 2022 
+
+Uitgebracht aan...</msg>
+<status status="PASS" starttime="20250718 15:11:42.555" endtime="20250718 15:11:42.559"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${result.rc} != 0</arg>
+<arg>Log</arg>
+<arg>${result.stderr}</arg>
+<arg>ERROR</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20250718 15:11:42.560" endtime="20250718 15:11:42.563"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<arg>PDF text extraction failed! See log for details.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20250718 15:11:42.565" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20250718 15:11:42.563" endtime="20250718 15:11:42.566"/>
+</kw>
+<msg timestamp="20250718 15:11:42.567" level="INFO">${downloaded_text} = Interim-auditrapport baten-lastenagentschap  
+Rijksvastgoedbedrijf 2022 
+
+| 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Colofon 
+
+Titel 
+
+Interim auditrapport baten- lastenagentschap 
+Rijksvastgoedbedrijf 2022 
+
+Uitgebracht aan...</msg>
+<status status="PASS" starttime="20250718 15:11:41.306" endtime="20250718 15:11:42.567"/>
+</kw>
+<kw name="Get Text From PDF" library="common">
+<var>${baseline_text}</var>
+<arg>${baseline}</arg>
+<kw name="Run Process" library="Process">
+<var>${result}</var>
+<arg>python</arg>
+<arg>../resources/tools/extract_pdf_text.py</arg>
+<arg>${pdf_path}</arg>
+<arg>shell=True</arg>
+<arg>stdout=STDOUT</arg>
+<arg>stderr=STDERR</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<msg timestamp="20250718 15:11:42.570" level="INFO">Starting process:
+python ../resources/tools/extract_pdf_text.py ../resources/pdf_compare/baseline/interim-auditrapport-baten-lastenagentschap-rijksvastgoedbedrijf-2022.pdf</msg>
+<msg timestamp="20250718 15:11:42.590" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20250718 15:11:43.653" level="INFO">Process completed.</msg>
+<msg timestamp="20250718 15:11:43.653" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<status status="PASS" starttime="20250718 15:11:42.568" endtime="20250718 15:11:43.654"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${text}</var>
+<arg>${result.stdout}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250718 15:11:43.656" level="INFO">${text} = Interim-auditrapport baten-lastenagentschap  
+Rijksvastgoedbedrijf 2022 
+
+| 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Colofon 
+
+Titel 
+
+Interim auditrapport baten- lastenagentschap 
+Rijksvastgoedbedrijf 2022 
+
+Uitgebracht aan...</msg>
+<status status="PASS" starttime="20250718 15:11:43.654" endtime="20250718 15:11:43.656"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${result.rc} != 0</arg>
+<arg>Log</arg>
+<arg>${result.stderr}</arg>
+<arg>ERROR</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20250718 15:11:43.656" endtime="20250718 15:11:43.657"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<arg>PDF text extraction failed! See log for details.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20250718 15:11:43.659" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20250718 15:11:43.658" endtime="20250718 15:11:43.659"/>
+</kw>
+<msg timestamp="20250718 15:11:43.659" level="INFO">${baseline_text} = Interim-auditrapport baten-lastenagentschap  
+Rijksvastgoedbedrijf 2022 
+
+| 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Colofon 
+
+Titel 
+
+Interim auditrapport baten- lastenagentschap 
+Rijksvastgoedbedrijf 2022 
+
+Uitgebracht aan...</msg>
+<status status="PASS" starttime="20250718 15:11:42.567" endtime="20250718 15:11:43.659"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${downloaded_text}</arg>
+<arg>${baseline_text}</arg>
+<arg>PDF texts differ!</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250718 15:11:43.660" endtime="20250718 15:11:43.660"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>PDF texts are identical\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20250718 15:11:43.660" endtime="20250718 15:11:43.661"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:41.301" endtime="20250718 15:11:43.661"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:06.358" endtime="20250718 15:11:43.662"/>
+</test>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250718 15:11:43.664" endtime="20250718 15:11:43.664"/>
+</kw>
+<status status="PASS" starttime="20250718 15:11:03.068" endtime="20250718 15:11:43.664"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Vws Example Test">Vws Example Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
