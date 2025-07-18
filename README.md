@@ -1,5 +1,5 @@
 
-# Robot Framework VWS Browser Test Project
+# Robot Framework Example Test For Ministry VWS Page
 
 Dit project bevat een geavanceerd voorbeeld voor browser automatisering met Robot Framework, gebruikmakend van het Page Object Model, custom locators, en PDF-vergelijking.
 
