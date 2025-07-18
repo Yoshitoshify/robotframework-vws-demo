@@ -33,19 +33,10 @@ robotFrameworkVoorbeeld/
 ├── results/                          # Test resultaten en screenshots
 ```
 
-## Tests Uitvoeren
-
-### Alle tests uitvoeren:
+### Test uitvoeren:
 ```
 robot --outputdir results tests/
 ```
-
-### Specifieke test file uitvoeren:
-```
-robot --outputdir results tests/vws_example_test.robot
-```
-
-## Belangrijkste Testcase
 
 ### Test Demo Ministry VWS pdf comparison
 - Navigeert naar rijksoverheid.nl
@@ -65,15 +56,3 @@ Zie `tests/vws_example_test.robot` voor het volledige scenario.
 ## PDF Vergelijking
 
 Het keyword `Compare Downloaded PDF With Baseline` vergelijkt de tekst van een gedownloade PDF met een baseline PDF. Hiervoor wordt een Python script gebruikt (`extract_pdf_text.py`).
-
-## Suppress Warnings
-
-- Chrome logging en InsecureRequestWarning worden automatisch onderdrukt in de keywords.
-
-## Tips
-
-1. **Screenshots**: Bij gefaalde tests worden automatisch screenshots gemaakt in `results/screenshots`
-2. **Herbruikbare Keywords**: Gebruik keywords uit `common.robot` en de page object keyword files
-3. **Locators**: Beheer selectors centraal in `locators.py` voor onderhoudbaarheid
-4. **Output**: Alle testresultaten komen in de map `results/`
-5. **Page Object Pattern**: Voor overzicht en onderhoudbaarheid
