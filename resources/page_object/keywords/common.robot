@@ -59,6 +59,14 @@ Open Browser Setup
     Set Selenium Speed    0.5s
 
 # PDF compare functions
+Create Download Directory When Not Present
+    [Arguments]    ${dir}
+    ${exists}=    Run Keyword And Return Status    Directory Should Exist    ${dir}
+    IF    not ${exists}
+        Create Directory    ${dir}
+    END
+    Log To Console    Download directory created or already exists: ${dir}\n        ${dir}
+
 Remove Files In Directory
     [Arguments]    ${dir}
     ${files}=    List Files In Directory    ${dir}
@@ -68,6 +76,7 @@ Remove Files In Directory
 
 Download PDF To Folder
     [Arguments]    ${download_dir}
+    Create Directory    ${download_dir}
     ${pdf_link}=    Get Element Attribute    css:.download a[href$=".pdf"]    href
     Log To Console    PDF link found: ${pdf_link}
     # Download the file

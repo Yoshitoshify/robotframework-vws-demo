@@ -26,6 +26,7 @@ ${BROWSER}        Chrome
 Test Demo Ministry VWS pdf comparison
     
     # Setup
+    Create Download Directory When Not Present   ${DOWNLOAD_DIR}
     Remove Files In Directory    ${DOWNLOAD_DIR}
 
     # Navigate to VWS page
