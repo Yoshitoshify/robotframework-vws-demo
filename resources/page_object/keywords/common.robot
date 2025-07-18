@@ -4,16 +4,16 @@ Documentation     Gemeenschappelijke resources en keywords voor alle tests
 Library           SeleniumLibrary
 Library           RequestsLibrary
 Library           BuiltIn
-Library           ../../tools/string_utils.py
+Library           ${CURDIR}/../../tools/string_utils.py
 Library           Process
 Library           OperatingSystem
-Variables         ../locators/locators.py
+Variables         ${CURDIR}/../locators/locators.py
 
 *** Variables ***
 ${DEFAULT_TIMEOUT}    10s
-${SCREENSHOT_DIR}    ../results/screenshots
-${DOWNLOAD_DIR}    ../resources/pdf_compare/to_verify
-${BASELINE_DIR}    ../resources/pdf_compare/baseline
+${SCREENSHOT_DIR}    ${CURDIR}/../../results/screenshots
+${DOWNLOAD_DIR}    ${CURDIR}/../../pdf_compare/to_verify
+${BASELINE_DIR}    ${CURDIR}/../../pdf_compare/baseline
 
 *** Keywords ***
 Take Screenshot On Failure
@@ -100,7 +100,7 @@ Compare Downloaded PDF With Baseline
 
 Get Text From PDF
     [Arguments]    ${pdf_path}
-    ${result}=    Run Process    python   ../resources/tools/extract_pdf_text.py    ${pdf_path}    shell=True    stdout=STDOUT    stderr=STDERR
+    ${result}=    Run Process    python   ${CURDIR}/../../tools/extract_pdf_text.py    ${pdf_path}    shell=True    stdout=STDOUT    stderr=STDERR
     ${text}=    Set Variable    ${result.stdout}
     Run Keyword If    ${result.rc} != 0    Log    ${result.stderr}    ERROR
     Should Be Equal As Strings    ${result.rc}    0    PDF text extraction failed! See log for details.
