@@ -34,6 +34,7 @@ robotFrameworkVoorbeeld/
 ```
 
 ### Test uitvoeren:
+Vanuit root van project:
 ```
 robot --outputdir results tests/
 ```
